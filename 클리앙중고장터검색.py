@@ -29,7 +29,7 @@ for n in range(0,10):
                 try:
                         title = item.text
                         #print(title)
-                        if (re.search('애플워치'        , title)):
+                        if (re.search('아이폰', title)):
                                 print(title.strip())
 
                 except:
