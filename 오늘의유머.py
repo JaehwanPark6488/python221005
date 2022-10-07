@@ -7,7 +7,7 @@ import re
 hdr = {'User-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/603.1.23 (KHTML, like Gecko) Version/10.0 Mobile/14E5239e Safari/602.1'}
 
 for n in range(1,11):
-        #오늘이ㅡ 유머 베스트오브베스트
+        #오늘의 유머 베스트오브베스트 
         data ='http://www.todayhumor.co.kr/board/list.php?table=bestofbest&page=' + str(n)
         print(data)
         #웹브라우져 헤더 추가 
@@ -15,21 +15,22 @@ for n in range(1,11):
                                     headers = hdr)
 
         data = urllib.request.urlopen(req).read()
-        #한글이 깨지는 경우 디코딩
+        #한글이 깨지는 경우 디코딩 
         page = data.decode('utf-8', 'ignore')
         soup = BeautifulSoup(page, 'html.parser')
         #attrs는 속성들
-        list = soup.find_all('td', attrs={'data-role':'list-title-text'})
+        list = soup.find_all('td', attrs={'class':'subject'})
 
-        #<td class='subject'>
-        #<a href="/board/view.php?">미군의 저격수 처리 방법</a>
+        # <td class='subject'>
+        # <a href="/board/view.php?" >미군의 저격수 처리 방법</a>
 
         for item in list:
                 try:
-                        title = item.find("a").test.strip()
+                        title = item.find("a").text.strip() 
                         #print(title)
-                        if (re.search('한국', title)):
+                        if (re.search('미국', title)):
                                 print(title.strip())
 
                 except:
                         pass
+        
